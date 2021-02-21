@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Nikia.TelegramBotManager</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nikia.TelegramBotManager.Domain\Nikia.TelegramBotManager.Domain.csproj" />
+    <ProjectReference Include="..\Nikia.TelegramBotManager.Application.Contracts\Nikia.TelegramBotManager.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--<PackageReference Include="Telegram.Bot" Version="15.7.1" />-->
+    <PackageReference Include="Volo.Abp.Account.Application" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.FluentValidation" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="4.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Telegram.Bot">
+      <HintPath>..\..\..\..\Telegram.Bot\Telegram.Bot\src\Telegram.Bot\bin\Debug\netstandard1.1\Telegram.Bot.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

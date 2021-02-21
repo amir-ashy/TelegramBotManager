@@ -1,0 +1,42 @@
+{
+  "culture": "en",
+  "texts": {
+    "Menu:Home": "Home",
+    "Welcome": "Welcome",
+    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io.",
+    "Menu:TelegramManager": "Telegram Manager",
+    "Menu:Bot": "Define Bot",
+    "Menu:File": "Assign File",
+    "BotName": "Bot Name",
+    "IsActive": "Active",
+    "CheckMembership": "Check Membership",
+    "MembershipTargetId": "Membership Target",
+    "NewBot": "New Bot",
+    "Close": "Close",
+    "NewFile": "New File",
+    "CopyShareurl": "Copy Share Url",
+    "FileName": "File Name",
+    "FileCode": "File Code",
+    "FileUrl": "File Url",
+    "ShareUrl": "Share Url",
+    "FileType": "File Type",
+    "Enum:FileType:0": "Audio",
+    "Enum:FileType:1": "Video",
+    "Enum:FileType:2": "Document",
+    "Enum:FileType:3": "Image",
+
+
+    "Permission:TelegramBotManager": "Telegram Bot Manager",
+    "Permission:Bots": "Bot Management",
+    "Permission:Bots.Create": "Creating new bot",
+    "Permission:Bots.Edit": "Editing the bot",
+    "Permission:Bots.Delete": "Deleting the bot",
+
+    "Permission:Files": "File Management",
+    "Permission:Files.Create": "Creating new file",
+    "Permission:Files.Edit": "Editing the file",
+    "Permission:Files.Delete": "Deleting the file"
+
+
+  }
+}

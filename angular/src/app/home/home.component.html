@@ -1,0 +1,246 @@
+<div class="container">
+  <div class="p-5 text-center">
+    <h1>{{ '::Welcome' | abpLocalization }}</h1>
+    <p class="lead px-lg-5 mx-lg-5">dashboard page of telegram bot manager</p>
+    <a *ngIf="!hasLoggedIn" (click)="login()" class="px-4 btn btn-primary ml-1" role="button">
+      <i class="fa fa-sign-in"></i> {{ 'AbpAccount::Login' | abpLocalization }}
+    </a>
+  </div>
+
+  <div *ngIf="hasLoggedIn" class="card mt-4 mb-5">
+    <div class="card-body">
+      <div class="row text-center justify-content-md-center">
+        <div class="col-lg-4 border-left">
+          <div class="p-4">
+            <ngx-datatable [rows]="botStatusReport" default>
+              <ngx-datatable-column
+                [name]="'::BotName' | abpLocalization"
+                prop="botName"
+                width="75"
+              >
+              </ngx-datatable-column>
+
+              <ngx-datatable-column
+                [name]="'status'"
+                prop="botIsActive"
+                style="text-align: center"
+                width="25"
+              >
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  <span *ngIf="value === false">No</span>
+                  <span *ngIf="value === true">Yes</span>
+                </ng-template>
+              </ngx-datatable-column>
+            </ngx-datatable>
+          </div>
+        </div>
+
+        <ng-container
+          *ngTemplateOutlet="
+            ChartTemplate;
+            context: {
+              $implicit: {
+                title: 'Most Active users',
+                result: usersReport,
+                yAxisLabel: 'usage count',
+                xAxisLabel: 'users'
+              }
+            }
+          "
+        >
+        </ng-container>
+      </div>
+      <div class="row text-center mt-lg-3 justify-content-md-center">
+        <ng-container
+          *ngTemplateOutlet="
+            ChartTemplate;
+            context: {
+              $implicit: {
+                title: 'Most Downloaded file',
+                result: filesReport,
+                yAxisLabel: 'download count',
+                xAxisLabel: 'files'
+              }
+            }
+          "
+        >
+        </ng-container>
+
+        <div class="col-lg-4 border-left">
+          <div class="p-4">
+            <ngx-datatable [rows]="botStatusReport" default>
+              <ngx-datatable-column
+                [name]="'::BotName' | abpLocalization"
+                prop="botName"
+                width="75"
+              >
+              </ngx-datatable-column>
+
+              <ngx-datatable-column
+                [name]="'File Count'"
+                prop="totalFileCount"
+                style="text-align: center"
+                width="25"
+              >
+              </ngx-datatable-column>
+            </ngx-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="hasLoggedIn" class="card mt-4 mb-5">
+    <div class="card-body">
+      <div class="row text-center justify-content-md-center">
+        <ng-container
+          *ngTemplateOutlet="
+            featuresTemplate;
+            context: {
+              $implicit: {
+                title: 'Define new Bot',
+                href: '..//bots'
+              }
+            }
+          "
+        ></ng-container>
+
+        <ng-container
+          *ngTemplateOutlet="
+            featuresTemplate;
+            context: {
+              $implicit: {
+                title: 'Define new File',
+                href: '..//files'
+              }
+            }
+          "
+        ></ng-container>
+
+        <ng-container
+          *ngTemplateOutlet="
+            featuresTemplate;
+            context: {
+              $implicit: {
+                title: 'View Users',
+                href: '#'
+              }
+            }
+          "
+        ></ng-container>
+
+        <ng-container
+          *ngTemplateOutlet="
+            featuresTemplate;
+            context: {
+              $implicit: {
+                title: 'Telegram site',
+                href: 'www.telegram.org'
+              }
+            }
+          "
+        ></ng-container>
+
+        <ng-container
+          *ngTemplateOutlet="
+            featuresTemplate;
+            context: {
+              $implicit: {
+                title: 'Developer Page',
+                href: 'https://github.com/amir-ashy'
+              }
+            }
+          "
+        ></ng-container>
+
+        <ng-container
+          *ngTemplateOutlet="
+            featuresTemplate;
+            context: {
+              $implicit: {
+                title: '--',
+                href: '#'
+              }
+            }
+          "
+        ></ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #ChartTemplate let-context>
+  <div class="col-lg-8 border-left" style="min-height: 300px">
+    <div class="p-4">
+      <h5 class="mb-3">
+        {{ context.title }}
+      </h5>
+      <ngx-charts-bar-vertical
+        style="min-height: 270px"
+        [results]="context.result"
+        [gradient]="false"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="true"
+        [legendTitle]="context.xAxisLabel"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="context.xAxisLabel"
+        [yAxisLabel]="context.yAxisLabel"
+      >
+      </ngx-charts-bar-vertical>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #starterLinkTemplate let-context>
+  <div class="col-lg-4 border-left">
+    <div class="p-4">
+      <h5 class="mb-3">
+        <i class="fas fa-cubes text-secondary d-block my-3 fa-2x"></i> {{ context.title }}
+      </h5>
+      <p [innerHTML]="context.description"></p>
+      <ng-container
+        *ngIf="context.customTemplate"
+        [ngTemplateOutlet]="context.customTemplate"
+      ></ng-container>
+      <a
+        *ngFor="let link of context.links"
+        [href]="link.href"
+        target="_blank"
+        class="btn btn-link px-1"
+        >{{ link.label }} <i class="fas fa-chevron-right"></i
+      ></a>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #featuresTemplate let-context>
+  <div class="col-lg-2 border-left">
+    <div class="p-3">
+      <h6>
+        <i class="fas fa-plus d-block mb-3 fa- 2x text-secondary"></i>
+        <span [innerHTML]="context.title"></span>
+        <a [href]="context.href" target="_blank" class="d-block mt-2 btn btn-sm btn-link"
+          >Details <i class="fas fa-chevron-right"></i
+        ></a>
+      </h6>
+    </div>
+  </div>
+</ng-template>
+
+<style scoped>
+  .col-lg-2.border-left:nth-of-type(6n + 1) {
+    border-left: 0 !important;
+  }
+
+  .col-lg-4.border-left:nth-of-type(3n + 1) {
+    border-left: 0 !important;
+  }
+
+  @media (max-width: 991px) {
+    .border-left {
+      border-left: 0 !important;
+    }
+  }
+</style>
